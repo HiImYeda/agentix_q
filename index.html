@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/chat-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat N8N</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+      #root {
+        height: 100%;
+        width: 100%;
+      }
+      
+      /* Estilo de fallback para garantir que a aplicação sempre tenha uma aparência mínima */
+      body {
+        --primary-color: #FF3366;
+        --dark-bg: #121212;
+        --light-bg: #F5F7FA;
+        background-color: #121212;
+        color: white;
+      }
+      
+      .dark {
+        background-color: #121212;
+        color: white;
+      }
+      
+      .light {
+        background-color: #F5F7FA;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body class="dark">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

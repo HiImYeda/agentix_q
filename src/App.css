@@ -1,0 +1,422 @@
+/* App.css - Estilo principal do aplicativo */
+
+/* Variáveis */
+:root {
+  --neon-red: #ff2b4e;
+  --neon-blue: #00b3ff;
+  --neon-purple: #be00ff;
+  --dark-blue: #090928;
+  --black: #000000;
+  --white: #ffffff;
+  --header-height: 60px;
+  --border-radius: 16px;
+  --border-radius-sm: 10px;
+  --glass-bg: rgba(20, 20, 40, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --blue-border: rgba(120, 140, 255, 0.2);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+/* Containers principais */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100vh; /* Fixar altura */
+  overflow: hidden; /* Evitar vazamento */
+  padding-top: calc(var(--header-height) + 10px); /* Adicionar espaço para o header fixo */
+}
+
+.chat-main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100vh - 180px); /* Ajuste para limitar altura */
+  height: calc(100vh - 180px); /* Fixar altura */
+  overflow: hidden;
+  margin-top: 0; /* Removido espaço após o header pois já temos padding-top no app-container */
+  margin-bottom: 100px; /* Espaço para o input-area fixo */
+  position: relative; /* Para posicionamento absoluto dos filhos */
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative; /* Para posicionamento absoluto de elementos internos */
+}
+
+/* Área de entrada de mensagem - fixa na parte inferior */
+.input-area-container {
+  position: fixed; /* Mudando para fixed para garantir visibilidade */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 1rem;
+  z-index: 50;
+  background: var(--black); /* Adicionar fundo para evitar sobreposição */
+  padding-top: 5px; /* Espaço superior pequeno */
+}
+
+.input-area {
+  max-height: 250px;
+  min-height: 95px;
+  width: 100%;
+  background: rgba(20, 25, 40, 0.4);
+  border: 1px solid rgba(120, 140, 255, 0.2);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(15px);
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(0, 40, 255, 0.05);
+}
+
+.input-area:focus-within {
+  border-color: rgba(120, 140, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 80, 255, 0.1), inset 0 0 15px rgba(0, 40, 255, 0.1);
+}
+
+/* Header */
+.app-header {
+  position: fixed; /* Mudando para fixed para garantir posicionamento consistente */
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(15, 20, 35, 0.5);
+  border: 1px solid rgba(120, 140, 255, 0.2);
+  border-bottom: 2px solid rgba(120, 140, 255, 0.25); /* Linha inferior mais destacada */
+  backdrop-filter: blur(15px);
+  z-index: 200; /* Aumentado para garantir que fique acima de todos os elementos */
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+  height: var(--header-height);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm); /* Arredondar só em baixo */
+}
+
+body.light .app-header {
+  background: rgba(240, 240, 250, 0.8);
+  border-bottom: 2px solid rgba(100, 120, 230, 0.2);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px; /* Limitar largura para telas maiores */
+  margin: 0 auto; /* Centralizar */
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-version {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sessão */
+.session-input-container {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.session-control-panel {
+  display: flex;
+  align-items: center;
+}
+
+.session-display {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.session-buttons {
+  display: flex;
+  align-items: center;
+}
+
+/* Efeitos visuais */
+.glass-effect {
+  background: rgba(20, 25, 40, 0.5);
+  border: 1px solid rgba(120, 140, 255, 0.2);
+  backdrop-filter: blur(15px);
+}
+
+.neon-border {
+  box-shadow: 0 0 8px var(--neon-blue), 
+              inset 0 0 5px var(--neon-blue);
+  border: 1px solid rgba(0, 179, 255, 0.4);
+}
+
+.text-glow {
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.neon-button {
+  background: rgba(0, 120, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(0, 179, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 179, 255, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.neon-button:hover {
+  background: rgba(0, 140, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 179, 255, 0.4);
+  border-color: rgba(0, 179, 255, 0.7);
+}
+
+.neon-button:active {
+  background: rgba(0, 100, 255, 0.3);
+  transform: translateY(1px);
+}
+
+/* Media queries ajustados */
+@media screen and (max-width: 768px) {
+  .app-container {
+    padding: 0.75rem;
+    height: 100vh;
+  }
+  
+  .chat-main-container {
+    max-height: calc(100vh - 160px);
+    height: calc(100vh - 160px);
+    margin-bottom: 80px; /* Reduzido para telas menores */
+  }
+  
+  .input-area-container {
+    padding: 0 0.75rem 0.75rem;
+  }
+  
+  .input-area {
+    padding: 0.5rem;
+    min-height: 85px;
+  }
+  
+  .app-header {
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .neon-button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .session-display {
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .app-container {
+    padding: 0.5rem;
+  }
+  
+  .chat-main-container {
+    max-height: calc(100vh - 150px);
+    height: calc(100vh - 150px);
+    margin-bottom: 70px;
+  }
+  
+  .input-area-container {
+    padding: 0 0.5rem 0.5rem;
+  }
+  
+  .input-area {
+    padding: 0.4rem;
+    min-height: 75px;
+    max-height: 200px;
+  }
+  
+  .app-header {
+    padding: 0.3rem 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .session-input-container {
+    width: 100%;
+  }
+  
+  .session-input-container input {
+    flex: 1;
+  }
+  
+  .neon-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  :root {
+    --header-height: 80px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .chat-main-container {
+    max-height: calc(100vh - 140px);
+    height: calc(100vh - 140px);
+    margin-bottom: 60px;
+  }
+  
+  .input-area-container {
+    padding: 0 0.4rem 0.4rem;
+  }
+  
+  .input-area {
+    padding: 0.3rem;
+    min-height: 65px;
+    max-height: 180px;
+  }
+  
+  .app-header {
+    padding: 0.25rem 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .header-content {
+    gap: 0.4rem;
+  }
+  
+  .header-controls {
+    gap: 0.3rem;
+  }
+  
+  .neon-button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .chat-main-container {
+    max-height: calc(100vh - 130px);
+    height: calc(100vh - 130px);
+    margin-bottom: 50px;
+  }
+  
+  .input-area-container {
+    padding: 0 0.3rem 0.3rem;
+  }
+  
+  .input-area {
+    padding: 0.3rem;
+    min-height: 60px;
+    max-height: 160px;
+  }
+  
+  .app-header {
+    padding: 0.2rem 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  :root {
+    --header-height: 90px;
+  }
+}
+
+/* Animação de carregamento (substitui o BeatLoader) */
+.loading-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--neon-blue);
+  animation: dots-pulse 1.4s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes dots-pulse {
+  0%, 80%, 100% { 
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  40% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Tema claro */
+body.light .loading-dots span {
+  background-color: var(--neon-purple);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+}

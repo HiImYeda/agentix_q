@@ -1,0 +1,158 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.app-version {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  background: var(--bg-secondary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.session-control {
+  position: relative;
+}
+
+.session-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.session-input {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.session-input:focus {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 0 2px var(--neon-blue-15);
+}
+
+.session-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.session-display:hover {
+  background: var(--bg-hover);
+}
+
+.session-id {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--neon-blue);
+}
+
+.header-btn span {
+  font-size: 0.875rem;
+}
+
+.clear-btn {
+  color: var(--danger);
+}
+
+.clear-btn:hover {
+  background: var(--danger-15);
+  border-color: var(--danger);
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .header-btn span {
+    display: none;
+  }
+
+  .header-btn {
+    padding: 0.5rem;
+  }
+
+  .session-display {
+    padding: 0.5rem;
+  }
+
+  .session-id {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .session-display {
+    padding: 0.3rem;
+  }
+
+  .session-id {
+    font-size: 0.8rem;
+  }
+} 

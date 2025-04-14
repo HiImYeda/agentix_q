@@ -1,0 +1,240 @@
+/* Estilos para container principal */
+.media-upload-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* Botões de mídia */
+.media-upload-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.media-upload-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 30, 76, 0.15);
+  color: #f71e4c;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.media-upload-btn:hover {
+  background-color: rgba(255, 30, 76, 0.25);
+}
+
+.media-upload-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Input de arquivo escondido */
+.file-input {
+  display: none;
+}
+
+/* Container de gravação de áudio */
+.audio-recording-container {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #000;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  min-width: 200px;
+}
+
+.audio-recording-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audio-recording-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #f71e4c;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.audio-recording-time {
+  color: white;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.audio-recording-stop-btn {
+  margin-left: auto;
+  background-color: #f71e4c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Container de preview de áudio */
+.audio-preview-container {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #121212;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 320px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+}
+
+.hidden-audio-player {
+  display: none !important;
+}
+
+/* Player de áudio personalizado */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.audio-play-button {
+  background-color: white;
+  color: #4CAF50;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.audio-play-button:hover {
+  transform: scale(1.05);
+}
+
+.audio-play-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Forma de onda de áudio */
+.audio-waveform {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  gap: 2px;
+}
+
+.audio-waveform-bar {
+  flex: 1;
+  background-color: #4CAF50;
+  border-radius: 2px;
+  min-height: 3px;
+}
+
+/* Duração do áudio */
+.audio-duration {
+  color: white;
+  font-family: monospace;
+  font-size: 0.8rem;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Ações para o áudio */
+.audio-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.audio-delete-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: #f71e4c;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.audio-delete-button:hover {
+  text-decoration: underline;
+}
+
+/* Container de preview de imagem */
+.image-preview-container {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #121212;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+}
+
+.image-preview {
+  max-width: 250px;
+  max-height: 200px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.image-delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #f71e4c;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.image-type-indicator {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f71e4c;
+  color: white;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+} 
