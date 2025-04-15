@@ -4,6 +4,9 @@ import ChatWindow from './components/ChatWindow/ChatWindow';
 import InputBar from './components/InputBar/InputBar';
 import Header from './components/Header/Header';
 import useChat from './hooks/useChat';
+import Settings from './components/Settings/Settings';
+import toast, { Toaster } from 'react-hot-toast';
+import { saveAs } from 'file-saver';
 
 // Estilos inline para debug
 const debugStyles = {
@@ -22,6 +25,23 @@ const debugStyles = {
     border: '1px solid #ff3366',
     textAlign: 'center'
   }
+};
+
+const defaultSettings = {
+  messageColor: "#757575",
+  messageBackground: "rgba(40, 40, 40, 0.7)",
+  assistantMessageColor: "#c5c5c5",
+  assistantMessageBackground: "rgba(80, 80, 80, 0.7)",
+  containerColor: "#000000",
+  webhook1: "",
+  webhook1Name: "Webhook 1",
+  webhook1Active: false,
+  webhook2: "",
+  webhook2Name: "Webhook 2",
+  webhook2Active: false,
+  webhook3: "",
+  webhook3Name: "Webhook 3",
+  webhook3Active: false,
 };
 
 function App() {
@@ -444,6 +464,68 @@ function App() {
     }
   }, []);
 
+  // Função para enviar mensagem para webhook
+  const sendToWebhook = async (webhookUrl, message) => {
+    if (!webhookUrl) return;
+    
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: message
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Webhook error: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Failed to send to webhook:", error);
+      toast.error("Falha ao enviar para webhook: " + error.message);
+    }
+  };
+
+  // Função para enviar mensagens para webhooks ativos
+  const sendToActiveWebhooks = (message) => {
+    const webhooks = [
+      { url: settings.webhook1, active: settings.webhook1Active, name: settings.webhook1Name },
+      { url: settings.webhook2, active: settings.webhook2Active, name: settings.webhook2Name },
+      { url: settings.webhook3, active: settings.webhook3Active, name: settings.webhook3Name }
+    ];
+    
+    webhooks.forEach(webhook => {
+      if (webhook.active && webhook.url) {
+        sendToWebhook(webhook.url, message);
+      }
+    });
+  };
+
+  const handleSendMessage = () => {
+    // ... existing code ...
+    
+    // Add this after adding the user message
+    if (messageInput.trim()) {
+      const newMessage = { content: messageInput, role: 'user' };
+      setMessages(prevMessages => [...prevMessages, newMessage]);
+      setMessageInput('');
+      
+      // Send to active webhooks
+      sendToActiveWebhooks(`[User]: ${messageInput}`);
+      
+      // Simulate assistant response after a delay
+      setTimeout(() => {
+        const assistantMessage = { content: `Esta é uma resposta simulada para "${messageInput}"`, role: 'assistant' };
+        setMessages(prevMessages => [...prevMessages, assistantMessage]);
+        
+        // Send assistant response to webhooks
+        sendToActiveWebhooks(`[Assistant]: ${assistantMessage.content}`);
+      }, 1000);
+    }
+  };
+
   return (
     <div className="root-container">
       <div className="app">
@@ -489,6 +571,9 @@ function App() {
             theme={theme}
             onTranscribe={transcribeAudio}
           />
+          
+          {/* Toaster para notificações */}
+          <Toaster position="top-right" />
         </div>
       </div>
     </div>
