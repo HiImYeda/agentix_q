@@ -632,10 +632,10 @@ const Settings = ({
                   <div className="settings-section webhook-section">
                     <h3 style={{color: "#00b3ff"}}>Configuração de Webhooks</h3>
                     <p style={{color: "white", marginBottom: "15px"}}>
-                      Configure até 3 webhooks para integração com serviços externos.
+                      Configure os webhooks para integrar com serviços externos.
                     </p>
                   
-                    {/* Webhook 1 */}
+                    {/* Webhook de Transcrição */}
                     <div className="webhook-item">
                       <div className="webhook-header">
                         <div className="webhook-toggle">
@@ -647,19 +647,17 @@ const Settings = ({
                           />
                           <label htmlFor="webhook1Active" style={{color: "white"}}>Ativo</label>
                         </div>
-                        <input
-                          type="text"
-                          placeholder="Nome do Webhook"
-                          value={tempSettings.webhook1Name}
-                          onChange={(e) => handleChange('webhook1Name', e.target.value)}
-                          className="webhook-name"
-                          style={{backgroundColor: "#1e1e4f", color: "white"}}
-                        />
+                        <span style={{color: "white", fontWeight: "bold", marginLeft: "10px"}}>
+                          Transcrição de Áudio
+                        </span>
                       </div>
+                      <p style={{color: "#a0aec0", marginBottom: "10px", fontSize: "0.9rem"}}>
+                        Endpoint para processar a transcrição de áudio para texto.
+                      </p>
                       <div className="webhook-url">
                         <input
                           type="url"
-                          placeholder="URL do Webhook (https://...)"
+                          placeholder="URL do Webhook de Transcrição (https://...)"
                           value={tempSettings.webhook1}
                           onChange={(e) => handleChange('webhook1', e.target.value)}
                           className="webhook-input"
@@ -668,7 +666,7 @@ const Settings = ({
                       </div>
                     </div>
 
-                    {/* Webhook 2 */}
+                    {/* Webhook de Mensagens */}
                     <div className="webhook-item">
                       <div className="webhook-header">
                         <div className="webhook-toggle">
@@ -680,19 +678,17 @@ const Settings = ({
                           />
                           <label htmlFor="webhook2Active" style={{color: "white"}}>Ativo</label>
                         </div>
-                        <input
-                          type="text"
-                          placeholder="Nome do Webhook"
-                          value={tempSettings.webhook2Name}
-                          onChange={(e) => handleChange('webhook2Name', e.target.value)}
-                          className="webhook-name"
-                          style={{backgroundColor: "#1e1e4f", color: "white"}}
-                        />
+                        <span style={{color: "white", fontWeight: "bold", marginLeft: "10px"}}>
+                          Processamento de Mensagens
+                        </span>
                       </div>
+                      <p style={{color: "#a0aec0", marginBottom: "10px", fontSize: "0.9rem"}}>
+                        Endpoint para processar e responder às mensagens do chat.
+                      </p>
                       <div className="webhook-url">
                         <input
                           type="url"
-                          placeholder="URL do Webhook (https://...)"
+                          placeholder="URL do Webhook de Mensagens (https://...)"
                           value={tempSettings.webhook2}
                           onChange={(e) => handleChange('webhook2', e.target.value)}
                           className="webhook-input"
@@ -701,7 +697,7 @@ const Settings = ({
                       </div>
                     </div>
 
-                    {/* Webhook 3 */}
+                    {/* Webhook de Histórico */}
                     <div className="webhook-item">
                       <div className="webhook-header">
                         <div className="webhook-toggle">
@@ -713,19 +709,17 @@ const Settings = ({
                           />
                           <label htmlFor="webhook3Active" style={{color: "white"}}>Ativo</label>
                         </div>
-                        <input
-                          type="text"
-                          placeholder="Nome do Webhook"
-                          value={tempSettings.webhook3Name}
-                          onChange={(e) => handleChange('webhook3Name', e.target.value)}
-                          className="webhook-name"
-                          style={{backgroundColor: "#1e1e4f", color: "white"}}
-                        />
+                        <span style={{color: "white", fontWeight: "bold", marginLeft: "10px"}}>
+                          Histórico de Conversas
+                        </span>
                       </div>
+                      <p style={{color: "#a0aec0", marginBottom: "10px", fontSize: "0.9rem"}}>
+                        Endpoint para salvar e recuperar o histórico de conversas.
+                      </p>
                       <div className="webhook-url">
                         <input
                           type="url"
-                          placeholder="URL do Webhook (https://...)"
+                          placeholder="URL do Webhook de Histórico (https://...)"
                           value={tempSettings.webhook3}
                           onChange={(e) => handleChange('webhook3', e.target.value)}
                           className="webhook-input"
@@ -735,8 +729,8 @@ const Settings = ({
                     </div>
 
                     <div className="webhook-info" style={{color: "#a0aec0", marginTop: "20px"}}>
-                      <p>Os webhooks são usados para enviar dados de conversas para sistemas externos.</p>
-                      <p>Apenas webhooks ativos serão acionados durante as conversas.</p>
+                      <p>Os webhooks permitem que o chat se conecte a APIs externas para processamento adicional.</p>
+                      <p>Use webhooks para conectar o chat a modelos de IA, bancos de dados ou outros serviços.</p>
                     </div>
                   </div>
                 </div>
