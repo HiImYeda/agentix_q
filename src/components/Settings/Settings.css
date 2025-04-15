@@ -562,9 +562,29 @@
   overflow: hidden;
 }
 
-.preset-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+/* Tooltip para os botões de tema */
+.preset-button::before {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.preset-button:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 
 .preset-button:active {
@@ -585,6 +605,22 @@
 
 .preset-button.pastel {
   background: linear-gradient(45deg, #ffafcc, #a2d2ff);
+}
+
+.preset-button.neon {
+  background: linear-gradient(45deg, #39FF14, #FF10F0);
+}
+
+.preset-button.retro {
+  background: linear-gradient(45deg, #FF6B35, #004E89);
+}
+
+.preset-button.ocean {
+  background: linear-gradient(45deg, #00CCF5, #0077B6);
+}
+
+.preset-button.nature {
+  background: linear-gradient(45deg, #588157, #3A5A40);
 }
 
 .preset-button::after {
@@ -712,4 +748,111 @@ body > .settings-overlay {
 
 .checkbox-container label {
   font-size: 0.85rem;
+}
+
+/* Ajustando o layout para comportar 8 botões */
+@media (min-width: 768px) {
+  .preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .preset-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 767px) {
+  .preset-buttons {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .preset-buttons {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  
+  .preset-button {
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+  }
+}
+
+/* Estilos para seleção de cores do container principal */
+.container-colors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.color-option {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.color-option:active {
+  transform: scale(0.95);
+}
+
+/* Tooltip para os botões de cor */
+.color-option::before {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.color-option:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 767px) {
+  .container-colors {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-colors {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  
+  .color-option {
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+  }
 } 

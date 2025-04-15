@@ -21,7 +21,8 @@ const Settings = ({
     uiEffects: 'advanced', // basic, advanced, minimal
     messageCornerRadius: '10px', // Raio dos cantos dos balões de mensagem
     fontFamily: 'System', // Fonte do texto
-    animationSpeed: 'normal' // Velocidade das animações
+    animationSpeed: 'normal', // Velocidade das animações
+    containerColor: '#121236' // Cor do container principal
   };
   
   // Estado temporário para as configurações
@@ -35,6 +36,51 @@ const Settings = ({
       ...tempSettings,
       [key]: value
     });
+    
+    // Aplicação imediata para containerColor
+    if (key === 'containerColor') {
+      const rootElement = document.querySelector('.root-container');
+      if (rootElement) {
+        rootElement.style.backgroundColor = value;
+      }
+      
+      const appContainer = document.querySelector('.app-container');
+      if (appContainer) {
+        // Função para ajustar a luminosidade de uma cor hex
+        const adjustColorBrightness = (hex, percent) => {
+          hex = hex.replace(/^\s*#|\s*$/g, '');
+          
+          // Converte para RGB
+          let r = parseInt(hex.substr(0, 2), 16);
+          let g = parseInt(hex.substr(2, 2), 16);
+          let b = parseInt(hex.substr(4, 2), 16);
+          
+          // Ajusta a luminosidade
+          r = parseInt(r * (100 + percent) / 100);
+          g = parseInt(g * (100 + percent) / 100);
+          b = parseInt(b * (100 + percent) / 100);
+          
+          // Garante que os valores estejam dentro dos limites
+          r = r < 255 ? r : 255;
+          g = g < 255 ? g : 255;
+          b = b < 255 ? b : 255;
+          
+          // Converte de volta para hex
+          return "#" + 
+            (r.toString(16).length === 1 ? "0" + r.toString(16) : r.toString(16)) +
+            (g.toString(16).length === 1 ? "0" + g.toString(16) : g.toString(16)) +
+            (b.toString(16).length === 1 ? "0" + b.toString(16) : b.toString(16));
+        };
+
+        appContainer.style.borderColor = adjustColorBrightness(value, 20);
+      }
+      
+      // Garantir que o painel de configurações mantenha a cor fixa
+      const settingsPanel = document.querySelector('.settings-panel');
+      if (settingsPanel) {
+        settingsPanel.style.backgroundColor = '#121236';
+      }
+    }
   };
 
   const handleSelectChange = (e) => {
@@ -220,6 +266,62 @@ const Settings = ({
                       }}
                       title="Tema Pastel"
                     ></button>
+                    <button 
+                      className="preset-button neon"
+                      onClick={() => {
+                        setTempSettings({
+                          ...tempSettings,
+                          primaryColor: '#39FF14',
+                          accentColor: '#FF10F0',
+                          chatBgColor: '#121212',
+                          messageBgColor: '#1f1f1f',
+                          userMessageBgColor: '#2a2a2a'
+                        });
+                      }}
+                      title="Tema Neon"
+                    ></button>
+                    <button 
+                      className="preset-button retro"
+                      onClick={() => {
+                        setTempSettings({
+                          ...tempSettings,
+                          primaryColor: '#FF6B35',
+                          accentColor: '#004E89',
+                          chatBgColor: '#2B2A33',
+                          messageBgColor: '#454545',
+                          userMessageBgColor: '#3C3C3C'
+                        });
+                      }}
+                      title="Tema Retro"
+                    ></button>
+                    <button 
+                      className="preset-button ocean"
+                      onClick={() => {
+                        setTempSettings({
+                          ...tempSettings,
+                          primaryColor: '#00CCF5',
+                          accentColor: '#0077B6',
+                          chatBgColor: '#03045E',
+                          messageBgColor: '#023E8A',
+                          userMessageBgColor: '#0096C7'
+                        });
+                      }}
+                      title="Tema Ocean"
+                    ></button>
+                    <button 
+                      className="preset-button nature"
+                      onClick={() => {
+                        setTempSettings({
+                          ...tempSettings,
+                          primaryColor: '#588157',
+                          accentColor: '#3A5A40',
+                          chatBgColor: '#1E1E1E',
+                          messageBgColor: '#344E41',
+                          userMessageBgColor: '#4A7856'
+                        });
+                      }}
+                      title="Tema Nature"
+                    ></button>
                   </div>
                 </div>
                 
@@ -291,6 +393,57 @@ const Settings = ({
             
             {/* Coluna 2 */}
             <div>
+              <div className="settings-section">
+                <h3 style={{color: "#00b3ff"}}>Container Principal</h3>
+                <div className="settings-option">
+                  <label htmlFor="containerColor" style={{color: "white"}}>Cor do Container</label>
+                  <div className="container-colors">
+                    <button 
+                      className="color-option" 
+                      title="Preto"
+                      onClick={() => handleChange('containerColor', '#121236')} 
+                      style={{backgroundColor: '#121236', border: tempSettings.containerColor === '#121236' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                    <button 
+                      className="color-option" 
+                      title="Branco"
+                      onClick={() => handleChange('containerColor', '#f5f5ff')} 
+                      style={{backgroundColor: '#f5f5ff', border: tempSettings.containerColor === '#f5f5ff' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                    <button 
+                      className="color-option" 
+                      title="Cinza"
+                      onClick={() => handleChange('containerColor', '#2a2a40')} 
+                      style={{backgroundColor: '#2a2a40', border: tempSettings.containerColor === '#2a2a40' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                    <button 
+                      className="color-option" 
+                      title="Vermelho"
+                      onClick={() => handleChange('containerColor', '#2e1215')} 
+                      style={{backgroundColor: '#2e1215', border: tempSettings.containerColor === '#2e1215' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                    <button 
+                      className="color-option" 
+                      title="Azul"
+                      onClick={() => handleChange('containerColor', '#0f1e36')} 
+                      style={{backgroundColor: '#0f1e36', border: tempSettings.containerColor === '#0f1e36' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                    <button 
+                      className="color-option" 
+                      title="Verde"
+                      onClick={() => handleChange('containerColor', '#0c2518')} 
+                      style={{backgroundColor: '#0c2518', border: tempSettings.containerColor === '#0c2518' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                    <button 
+                      className="color-option" 
+                      title="Roxo"
+                      onClick={() => handleChange('containerColor', '#261036')} 
+                      style={{backgroundColor: '#261036', border: tempSettings.containerColor === '#261036' ? '2px solid #00b3ff' : '2px solid transparent'}}
+                    ></button>
+                  </div>
+                </div>
+              </div>
+              
               <div className="settings-section">
                 <h3 style={{color: "#00b3ff"}}>Balões de Mensagem</h3>
                 <div className="settings-option">

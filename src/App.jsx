@@ -210,6 +210,18 @@ function App() {
         .chat-window {
           background-color: ${newSettings.chatBgColor || '#090928'} !important;
         }
+        
+        .settings-panel {
+          background-color: #121236 !important;
+        }
+        
+        .root-container {
+          background-color: ${newSettings.containerColor || '#121236'} !important;
+        }
+        
+        .app-container {
+          border-color: ${adjustColorBrightness(newSettings.containerColor || '#121236', 20)} !important;
+        }
       `;
       
       document.head.appendChild(style);
@@ -285,6 +297,38 @@ function App() {
           document.documentElement.style.setProperty('--bg-primary', parsedSettings.chatBgColor);
         }
         
+        // Aplica cor do container principal
+        if (parsedSettings.containerColor) {
+          const setContainerColor = () => {
+            const style = document.createElement('style');
+            style.id = 'custom-container-styles';
+            
+            // Remover estilos existentes se houver
+            const existingStyle = document.getElementById('custom-container-styles');
+            if (existingStyle) {
+              existingStyle.remove();
+            }
+            
+            style.innerHTML = `
+              .settings-panel {
+                background-color: #121236 !important;
+              }
+              
+              .root-container {
+                background-color: ${parsedSettings.containerColor || '#121236'} !important;
+              }
+              
+              .app-container {
+                border-color: ${adjustColorBrightness(parsedSettings.containerColor || '#121236', 20)} !important;
+              }
+            `;
+            
+            document.head.appendChild(style);
+          };
+          
+          setContainerColor();
+        }
+        
         // Aplica cores específicas dos balões de mensagem (se definidas)
         if (parsedSettings.messageBgColor) {
           document.documentElement.style.setProperty('--message-bg', parsedSettings.messageBgColor + '22');
@@ -358,36 +402,6 @@ function App() {
             (g.toString(16).length === 1 ? "0" + g.toString(16) : g.toString(16)) +
             (b.toString(16).length === 1 ? "0" + b.toString(16) : b.toString(16));
         }
-        
-        // Aplicar cores diretas aos balões de mensagem para garantir visibilidade
-        const setDirectChatStyles = () => {
-          const style = document.createElement('style');
-          style.id = 'custom-message-styles';
-          
-          // Remover estilos existentes se houver
-          const existingStyle = document.getElementById('custom-message-styles');
-          if (existingStyle) {
-            existingStyle.remove();
-          }
-          
-          style.innerHTML = `
-            .message-bubble.ai-bubble {
-              background: linear-gradient(135deg, ${parsedSettings.messageBgColor || '#1e1e1e'}, ${parsedSettings.messageBgColor ? adjustColorBrightness(parsedSettings.messageBgColor, 20) : '#2a2a2a'}) !important;
-              color: #ffffff !important;
-            }
-            
-            .message-bubble.user-bubble {
-              background: linear-gradient(135deg, ${parsedSettings.userMessageBgColor || '#232323'}, ${parsedSettings.userMessageBgColor ? adjustColorBrightness(parsedSettings.userMessageBgColor, 20) : '#333333'}) !important;
-              color: #ffffff !important;
-            }
-            
-            .chat-window {
-              background-color: ${parsedSettings.chatBgColor || '#090928'} !important;
-            }
-          `;
-          
-          document.head.appendChild(style);
-        };
         
         // Aplicar estilos diretos
         setDirectChatStyles();
