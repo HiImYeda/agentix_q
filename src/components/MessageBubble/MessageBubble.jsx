@@ -234,18 +234,6 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
             renderContent()
           )}
         </div>
-        
-        <div className={`message-time ${isSmallScreen ? 'time-small' : ''}`}>
-          {!isLoading && (
-            <>
-              {isUser ? 'Você' : 'Agentix'} • 
-              {new Date(timestamp).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </>
-          )}
-        </div>
       </div>
       
       {showAvatar && isUser && (

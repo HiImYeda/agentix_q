@@ -1,0 +1,274 @@
+:root {
+  /* Cores base */
+  --neon-blue: #00f3ff;
+  --neon-blue-rgb: 0, 243, 255;
+  --neon-purple: #8a2be2;
+  --neon-purple-rgb: 138, 43, 226;
+  
+  /* Tema escuro (padrão) */
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-tertiary: #0f3460;
+  --bg-input: #1e1e4f;
+  
+  --glass-bg: rgba(26, 26, 46, 0.7);
+  --glass-border: rgba(var(--neon-blue-rgb), 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #b8c1ec;
+  --text-tertiary: #8892b0;
+  
+  --border-color: rgba(255, 255, 255, 0.2);
+  
+  /* Efeitos de glassmorphism */
+  --glass-blur: 12px;
+  --glass-saturation: saturate(180%);
+  
+  /* Dicas visuais */
+  --hover-brightness: brightness(120%);
+  --active-brightness: brightness(90%);
+  
+  /* Animações */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Cores do sistema */
+  --neon-red: #ff2b4e;
+  --dark-blue: #090928;
+  --black: #000000;
+  --white: #ffffff;
+
+  /* Configurações de efeitos */
+  --enable-animations: 1;
+  --enable-glow: 1;
+  --enable-blur: 1;
+  --enable-background: 1;
+  
+  /* Altura do cabeçalho */
+  --header-height: 60px;
+  
+  /* Bordas */
+  --border-radius: 16px;
+  --border-radius-sm: 10px;
+  
+  /* Backgrounds */
+  --blue-border: rgba(120, 140, 255, 0.2);
+
+  /* Cores padrão para balões de mensagem */
+  --message-bg: rgba(0, 179, 255, 0.13);
+  --message-border: rgba(0, 179, 255, 0.2);
+  --message-user-bg: rgba(190, 0, 255, 0.13);
+  --message-user-border: rgba(190, 0, 255, 0.2);
+  --message-shadow: rgba(0, 179, 255, 0.4);
+
+  /* Message colors */
+  --ai-message-bg: var(--bg-tertiary);
+  --ai-message-text: var(--text-primary);
+  --user-message-bg: var(--accent-primary);
+  --user-message-text: #000000;
+  
+  /* Gradient colors for messages */
+  --ai-gradient-start: #0f3460;
+  --ai-gradient-end: #283c5b;
+  --user-gradient-start: #00f3ff;
+  --user-gradient-end: #00d4ff;
+
+  /* Accent colors */
+  --accent-primary: var(--neon-blue);
+  --accent-secondary: var(--neon-purple);
+  --accent-primary-rgb: var(--neon-blue-rgb);
+  --accent-secondary-rgb: var(--neon-purple-rgb);
+}
+
+/* Tema claro */
+[data-theme="light"] {
+  --bg-primary: #f0f8ff;
+  --bg-secondary: #e6f2ff;
+  --bg-tertiary: #d4e6ff;
+  --bg-input: #ffffff;
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  
+  --text-primary: #121236;
+  --text-secondary: rgba(18, 18, 54, 0.7);
+  --text-tertiary: rgba(18, 18, 54, 0.5);
+  
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Classes condicionais para efeitos */
+.no-animations * {
+  animation: none !important;
+  transition: none !important;
+}
+
+.no-glow * {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.no-blur * {
+  backdrop-filter: none !important;
+}
+
+.no-background::before,
+.no-background::after {
+  display: none !important;
+}
+
+/* Efeitos e animações */
+@keyframes neonGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(var(--neon-blue-rgb), 0.5),
+                0 0 10px rgba(var(--neon-blue-rgb), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(var(--neon-blue-rgb), 0.8),
+                0 0 20px rgba(var(--neon-blue-rgb), 0.5),
+                0 0 30px rgba(var(--neon-blue-rgb), 0.3);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(var(--neon-blue-rgb), 0.5),
+                0 0 10px rgba(var(--neon-blue-rgb), 0.3);
+  }
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes floatingGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(var(--neon-blue-rgb), 0.5);
+    transform: translateY(0px);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(var(--neon-blue-rgb), 0.8),
+                0 0 30px rgba(var(--neon-purple-rgb), 0.3);
+    transform: translateY(-5px);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(var(--neon-blue-rgb), 0.5);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(var(--neon-blue-rgb), 0.5);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(var(--neon-blue-rgb), 0.8),
+                 0 0 15px rgba(var(--neon-blue-rgb), 0.5);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(var(--neon-blue-rgb), 0.5);
+  }
+}
+
+/* Classes de utilidade para efeitos */
+.neon-text {
+  color: var(--neon-blue);
+  animation: textGlow 2s infinite;
+}
+
+.neon-border {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px rgba(var(--neon-blue-rgb), 0.5);
+}
+
+.neon-button {
+  background-color: transparent;
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-button:hover {
+  background-color: var(--neon-blue);
+  color: var(--bg-primary);
+  box-shadow: 0 0 15px rgba(var(--neon-blue-rgb), 0.8);
+  transform: translateY(-2px);
+}
+
+.neon-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 8px rgba(var(--neon-blue-rgb), 0.6);
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--neon-blue-rgb), 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.neon-button:hover::before {
+  left: 100%;
+}
+
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur) var(--glass-saturation);
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturation);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow);
+} 

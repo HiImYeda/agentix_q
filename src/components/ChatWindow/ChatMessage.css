@@ -1,0 +1,16 @@
+.message {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  max-width: 85%;
+  animation: fadeIn 0.3s ease-out;
+  background: var(--message-bg, rgba(0, 179, 255, 0.13));
+  border: 1px solid var(--message-border, rgba(0, 179, 255, 0.2));
+  box-shadow: 0 2px 8px var(--message-shadow, rgba(0, 0, 0, 0.2));
+}
+
+.message.user {
+  margin-left: auto;
+  background: var(--message-user-bg, rgba(190, 0, 255, 0.13));
+  border-color: var(--message-user-border, rgba(190, 0, 255, 0.2));
+} 

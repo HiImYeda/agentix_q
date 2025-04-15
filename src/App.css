@@ -26,8 +26,40 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
-  background-color: var(--black);
+  background-color: var(--dark-blue);
   color: var(--white);
+  position: relative;
+}
+
+/* Background com elementos neon */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, rgba(0, 179, 255, 0.1) 0%, transparent 100%),
+    radial-gradient(circle at 80% 20%, rgba(190, 0, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(255, 43, 78, 0.1) 0%, transparent 40%);
+  z-index: -1;
+}
+
+/* Retângulos decorativos */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, transparent 45%, rgba(0, 179, 255, 0.1) 45%, rgba(0, 179, 255, 0.1) 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, rgba(190, 0, 255, 0.1) 45%, rgba(190, 0, 255, 0.1) 55%, transparent 55%);
+  background-size: 60px 60px;
+  z-index: -1;
+  opacity: 0.5;
 }
 
 /* Containers principais */
@@ -40,22 +72,26 @@ body {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  height: 100vh; /* Fixar altura */
-  overflow: hidden; /* Evitar vazamento */
-  padding-top: calc(var(--header-height) + 10px); /* Adicionar espaço para o header fixo */
+  height: 100vh;
+  overflow: hidden;
+  padding-top: calc(var(--header-height) + 10px);
+  backdrop-filter: blur(10px);
+  background: rgba(9, 9, 40, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 179, 255, 0.1);
+  border-radius: var(--border-radius);
 }
 
 .chat-main-container {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: calc(100vh - 180px); /* Ajuste para limitar altura */
-  height: calc(100vh - 180px); /* Fixar altura */
+  position: relative;
   overflow: hidden;
-  margin-top: 0; /* Removido espaço após o header pois já temos padding-top no app-container */
-  margin-bottom: 100px; /* Espaço para o input-area fixo */
-  position: relative; /* Para posicionamento absoluto dos filhos */
+  border-radius: var(--border-radius);
+  background: rgba(15, 15, 35, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(190, 0, 255, 0.1);
+  margin: 1rem 0;
+  padding: 1rem;
 }
 
 .chat-container {
@@ -419,4 +455,40 @@ body.light .loading-dots span {
   align-items: center;
   margin: 10px 0;
   padding: 10px;
+}
+
+/* Estilos para diferentes backgrounds */
+.root-container[data-background-style="grid"] {
+  background-color: var(--bg-primary);
+  background-image: 
+    linear-gradient(rgba(var(--neon-blue-rgb), 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--neon-blue-rgb), 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.root-container[data-background-style="gradient"] {
+  background: linear-gradient(135deg, 
+    var(--bg-primary), 
+    rgba(var(--neon-blue-rgb), 0.1), 
+    var(--bg-primary), 
+    rgba(var(--neon-purple-rgb), 0.1), 
+    var(--bg-primary));
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+}
+
+.root-container[data-background-style="solid"] {
+  background-color: var(--bg-primary);
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
