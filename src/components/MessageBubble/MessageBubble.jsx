@@ -49,7 +49,6 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
     ${isUser ? 'user-bubble' : 'ai-bubble'}
     ${isComplete ? 'complete' : ''}
     ${isLoading ? 'loading' : ''}
-    ${isSmallScreen ? 'bubble-small' : ''}
   `;
   
   // Função para renderizar conteúdo da mensagem
@@ -59,7 +58,7 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
       switch (message.mediaType) {
         case 'image':
           return (
-            <div className={`media-container ${isSmallScreen ? 'media-small' : ''}`}>
+            <div className="media-container">
               <img 
                 src={message.mediaUrl} 
                 alt="Imagem enviada" 
@@ -69,7 +68,7 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
           );
         case 'audio':
           return (
-            <div className={`media-container ${isSmallScreen ? 'media-small' : ''}`}>
+            <div className="media-container">
               <audio 
                 controls 
                 src={message.mediaUrl} 
@@ -84,6 +83,20 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
     
     // Obter o conteúdo da mensagem
     const content = isUser ? text : typedText;
+    
+    // Se o conteúdo for uma string vazia ou undefined, retornar div vazia
+    if (!content) {
+      return <div className="message-text empty-message"></div>;
+    }
+    
+    // Para mensagens curtas sem formatação especial, renderizar diretamente
+    if (content.length < 100 && !content.includes('```') && !content.includes('<')) {
+      return (
+        <div className="message-content simple-message">
+          <p className="message-text single-line">{content.trim()}</p>
+        </div>
+      );
+    }
     
     // Função para dividir o conteúdo em partes (tokens) de texto normal e código
     const tokenizeContent = (text) => {
@@ -209,20 +222,20 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
   
   return (
     <motion.div 
-      className={`message-row ${isUser ? 'message-user' : 'message-ai'} ${isSmallScreen ? 'message-row-small' : ''}`}
+      className={`message-row ${isUser ? 'message-user' : 'message-ai'}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
       {showAvatar && !isUser && (
-        <div className={`avatar-container ${isSmallScreen ? 'avatar-small' : ''}`}>
+        <div className="avatar-container">
           <div className="avatar">
-            <FaRobot className="avatar-icon ai-icon" />
+            <FaRobot className="avatar-icon" />
           </div>
         </div>
       )}
       
-      <div className="bubble-container">
+      <div className={`bubble-container ${isUser ? 'user-container' : 'ai-container'}`}>
         <div className={bubbleClasses}>
           {isLoading ? (
             <div className="loading-indicator">
@@ -237,9 +250,9 @@ const MessageBubble = ({ message, showAvatar = true, isLoading = false, isSmallS
       </div>
       
       {showAvatar && isUser && (
-        <div className={`avatar-container ${isSmallScreen ? 'avatar-small' : ''}`}>
+        <div className="avatar-container">
           <div className="avatar">
-            <FaUser className="avatar-icon user-icon" />
+            <FaUser className="avatar-icon" />
           </div>
         </div>
       )}

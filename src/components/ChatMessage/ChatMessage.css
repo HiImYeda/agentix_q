@@ -286,4 +286,44 @@
     width: 4px;
     height: 4px;
   }
+}
+
+/* Estilos para as mensagens de chat */
+
+/* Botões */
+.button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover, .button.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Container do chat */
+.chat-container {
+  border: 1px solid var(--borderColor, var(--gray));
+  border-radius: 8px;
+  background-color: var(--backgroundColor, var(--white));
+  color: var(--textColor, var(--black));
+}
+
+/* Barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--backgroundColor, var(--white));
+}
+
+::-webkit-scrollbar {
+  width: 8px;
 } 

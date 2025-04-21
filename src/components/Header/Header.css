@@ -1,141 +1,268 @@
+/* Estilo para o cabeçalho */
 .header {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  background: var(--glass-bg);
-  border-bottom: 1px solid var(--glass-border);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+  padding: 0.75rem 1.5rem;
+  height: var(--header-height);
+  background: var(--surface);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 200;
+  transition: var(--transition);
+}
+
+body.dark .header {
+  background: var(--dark-surface);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .header-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
-  max-width: 1200px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--content-max-width);
   margin: 0 auto;
+  height: 100%;
 }
 
 .header-left {
   display: flex;
   align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
   gap: 1rem;
+  margin-right: 1.5rem;
 }
 
-.header-logo {
+.logo-icon-container {
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 20px;
+  color: white;
+  transition: var(--transition);
 }
 
-.header-title {
-  font-size: 1.25rem;
+.logo-icon {
+  font-size: 20px;
+}
+
+.logo-text {
+  font-size: 1.4rem;
   font-weight: 600;
-  color: var(--neon-blue);
-  margin: 0;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition);
+  margin-left: 0.25rem;
 }
 
-.header-actions {
+.session-id {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  transition: var(--transition);
+}
+
+body.dark .session-id {
+  color: var(--dark-text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.session-id:hover {
+  background: rgba(58, 134, 255, 0.1);
+}
+
+.session-id-label {
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.session-id-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.session-id-input {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  outline: none;
+  background: var(--surface);
+  color: var(--text-primary);
+  width: 180px;
+  transition: var(--transition);
+}
+
+body.dark .session-id-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--dark-text-primary);
+}
+
+.session-id-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+}
+
+.session-save-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .header-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid var(--glass-border);
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.95rem;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2);
-  color: var(--white);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
+}
+
+body.dark .header-btn {
+  color: var(--dark-text-primary);
 }
 
 .header-btn:hover {
-  background: rgba(0, 179, 255, 0.1);
-  border-color: var(--neon-blue);
+  background: rgba(58, 134, 255, 0.1);
 }
 
 .button-icon {
   width: 20px;
   height: 20px;
+  color: var(--primary);
 }
 
-.new-chat-button {
-  padding: 0.5rem 1rem;
+.new-chat-btn {
+  background: rgba(58, 134, 255, 0.1);
+}
+
+.new-chat-btn:hover {
+  background: rgba(58, 134, 255, 0.2);
 }
 
 .settings-btn {
-  position: relative;
+  background: transparent;
 }
 
-.settings-btn .button-icon {
-  color: var(--neon-purple);
-}
-
-.settings-btn:hover .button-icon {
-  color: var(--neon-blue);
-}
-
-.session-control {
-  display: flex;
-  align-items: center;
-}
-
-.session-form {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.session-input {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.2);
-  color: var(--white);
-}
-
-.session-display {
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.2);
-  color: var(--white);
-  font-size: 0.9rem;
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
-  .header-content {
-    padding: 0.5rem;
+  .header {
+    padding: 0 1rem;
   }
-
-  .header-title {
-    font-size: 1rem;
+  
+  .logo-text {
+    font-size: 1.15rem;
   }
+  
+  .logo-icon-container {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .logo-icon {
+    font-size: 16px;
+  }
+  
+  .header-btn {
+    padding: 0.4rem 0.8rem;
+  }
+}
 
-  .new-chat-button span {
-    display: none;
+@media (max-width: 640px) {
+  .session-id-input {
+    width: 140px;
   }
 }
 
 @media (max-width: 480px) {
-  .header-left {
-    gap: 0.5rem;
+  .header {
+    padding: 0 0.75rem;
   }
-
-  .header-actions {
-    gap: 0.25rem;
+  
+  .logo {
+    margin-right: 1rem;
   }
-
+  
+  .logo-text {
+    font-size: 1rem;
+  }
+  
+  .logo-icon-container {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .logo-icon {
+    font-size: 14px;
+  }
+  
   .header-btn {
-    padding: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
   }
-
+  
   .button-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .session-id {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .session-id-input {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    width: 120px;
+  }
+  
+  .session-save-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn-text {
+    display: none;
+  }
+  
+  .header-btn {
+    padding: 0.35rem;
+  }
+  
+  .session-id-input {
+    width: 100px;
   }
 } 

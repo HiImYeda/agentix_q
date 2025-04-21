@@ -342,7 +342,7 @@ const InputBar = ({
               disabled={disabled || isTranscribing || isRecording}
               aria-label="Enviar imagem"
             >
-              <IoImage />
+              <IoImage size={24} />
             </button>
             
             <button
@@ -351,7 +351,7 @@ const InputBar = ({
               disabled={disabled || isTranscribing}
               aria-label={isRecording ? "Parar gravação" : "Iniciar gravação"}
             >
-              {isRecording ? <IoStop /> : <IoMic />}
+              {isRecording ? <IoStop size={24} /> : <IoMic size={24} />}
             </button>
           </>
         )}
@@ -362,7 +362,7 @@ const InputBar = ({
           disabled={disabled || (!text.trim() && !selectedMedia) || isTranscribing}
           aria-label="Enviar mensagem"
         >
-          <IoSend />
+          <IoSend size={24} />
         </button>
       </div>
       

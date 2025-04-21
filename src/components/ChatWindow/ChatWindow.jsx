@@ -17,7 +17,10 @@ const ChatWindow = ({ messages, loading, error, messagesEndRef, isSmallScreen })
     // Função para scroll para o final das mensagens
     const scrollToBottom = () => {
       if (messagesEndRef && messagesEndRef.current) {
-        messagesEndRef.current.scrollIntoView({ block: 'start' });
+        messagesEndRef.current.scrollIntoView({ 
+          block: 'end',
+          behavior: 'smooth'
+        });
       }
     };
     
@@ -39,7 +42,7 @@ const ChatWindow = ({ messages, loading, error, messagesEndRef, isSmallScreen })
   // Renderizar tela de boas-vindas se não houver mensagens
   const renderWelcomeScreen = () => {
     return (
-      <div className={`welcome-container ${isSmallScreen ? 'welcome-container-small' : ''}`}>
+      <div className="welcome-container">
         <h1 className="welcome-title">
           Agentix
         </h1>
@@ -47,7 +50,7 @@ const ChatWindow = ({ messages, loading, error, messagesEndRef, isSmallScreen })
           Seu assistente virtual inteligente pronto para te ajudar. Envie uma mensagem para começar a conversa.
         </p>
         
-        <div className={`welcome-hints ${isSmallScreen ? 'welcome-hints-small' : ''}`}>
+        <div className="welcome-hints">
           <div className="hint-item">
             <div className="hint-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -78,8 +81,8 @@ const ChatWindow = ({ messages, loading, error, messagesEndRef, isSmallScreen })
   };
 
   return (
-    <div className={`chat-window ${isSmallScreen ? 'chat-window-small' : ''}`}>
-      <div className={`messages-container ${isSmallScreen ? 'messages-container-small' : ''}`} ref={messagesContainerRef}>
+    <div className="chat-window">
+      <div className="messages-container" ref={messagesContainerRef}>
         {messages.length === 0 ? (
           renderWelcomeScreen()
         ) : (
@@ -89,7 +92,7 @@ const ChatWindow = ({ messages, loading, error, messagesEndRef, isSmallScreen })
                 key={`msg-${message.sender}-${index}`}
                 message={message}
                 showAvatar={shouldShowAvatar(message, index)}
-                isSmallScreen={isSmallScreen}
+                isSmallScreen={false}
               />
             ))}
             
@@ -106,7 +109,7 @@ const ChatWindow = ({ messages, loading, error, messagesEndRef, isSmallScreen })
                   messages[messages.length-1].sender !== 'ai'
                 }
                 isLoading={true}
-                isSmallScreen={isSmallScreen}
+                isSmallScreen={false}
               />
             )}
             

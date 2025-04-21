@@ -3,19 +3,15 @@
 @tailwind utilities;
 
 :root {
+  /* Cores base */
   --primary-color: #f71e4c;
-  --primary-light: #ff4e75;
-  --primary-dark: #d30d36;
-  --dark-blue: #0a1929;
-  --neon-red: #f71e4c;
-  --dark-bg: #121212;
-  --dark-surface: #1E1E1E;
-  --light-bg: #F5F7FA;
-  --light-surface: #FFFFFF;
-  --accent-color: #FF3366;
-  --success-color: #00C853;
-  --warning-color: #FFB300;
-  --error-color: #FF3D00;
+  --backgroundColor: #ffffff;
+  --textColor: #232323;
+  --borderColor: #dddddd;
+  
+  /* Cores do gradiente */
+  --gradientStartColor: #f71e4c;
+  --gradientEndColor: #ff4e75;
   
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
@@ -33,70 +29,24 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
   margin: 0;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.text-neon-red {
-  color: var(--neon-red);
-}
-
-.bg-neon-red {
-  background-color: var(--neon-red);
-}
-
-.bg-dark-blue {
-  background-color: var(--dark-blue);
-}
-
-.text-glow {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(247, 30, 76, 0.3);
-}
-
-.box-glow {
-  box-shadow: 0 0 20px rgba(247, 30, 76, 0.15);
-}
-
-/* Grid background */
-.grid-background {
-  background-image: 
-    linear-gradient(to right, rgba(247, 30, 76, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(247, 30, 76, 0.1) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Glass effect */
-.glass-effect {
-  background-color: rgba(10, 25, 41, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-/* Glow effects */
-.neon-glow {
-  box-shadow: 0 0 15px rgba(247, 30, 76, 0.7);
-}
-
-.neon-border {
-  border: 1px solid rgba(247, 30, 76, 0.5);
-  box-shadow: 0 0 10px rgba(247, 30, 76, 0.3);
-}
-
-.neon-button {
+/* Botões */
+.primary-button, .button {
   background-color: transparent;
-  color: var(--neon-red);
-  border: 1px solid var(--neon-red);
-  box-shadow: 0 0 10px rgba(247, 30, 76, 0.3);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   transition: all 0.3s ease;
 }
 
-.neon-button:hover {
-  background-color: var(--neon-red);
+.primary-button:hover, .button:hover, .button.active {
+  background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 0 20px rgba(247, 30, 76, 0.6);
 }
 
 /* App container */
@@ -107,6 +57,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  border: 1px solid var(--borderColor);
 }
 
 /* Scrollbar */
@@ -115,157 +68,60 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #121212;
+  background: var(--backgroundColor);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(247, 30, 76, 0.5);
+  background: var(--primary-color);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(247, 30, 76, 0.8);
-}
-
-/* Animações adicionais */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s forwards;
-}
-
-@keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px);
-    box-shadow: 0 0 0 rgba(247, 30, 76, 0);
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0);
-    box-shadow: 0 0 30px rgba(247, 30, 76, 0.3);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-}
-
-@keyframes pulseNeon {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
-}
-
-.animate-pulse-neon {
-  animation: pulseNeon 3s infinite;
-}
-
-@keyframes pulseStrongNeon {
-  0%, 100% { 
-    opacity: 0.4; 
-    filter: brightness(0.8);
-    box-shadow: 0 0 8px rgba(247, 30, 76, 0.6);
-  }
-  50% { 
-    opacity: 1; 
-    filter: brightness(1.3);
-    box-shadow: 0 0 25px rgba(247, 30, 76, 0.9), 0 0 40px rgba(247, 30, 76, 0.6);
-  }
-}
-
-.animate-pulse-strong-neon {
-  animation: pulseStrongNeon 2.5s infinite;
-}
-
-@keyframes slowBounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(15px);
-  }
-}
-
-.animate-slow-bounce {
-  animation: slowBounce 3s infinite ease-in-out;
-}
-
-/* Typing animation */
-.typing-text p {
-  overflow: hidden;
-  border-right: 2px solid var(--neon-red);
-  white-space: nowrap;
-  animation: typing 3s steps(40, end), blinkCaret 0.75s step-end infinite;
-  animation-fill-mode: both;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blinkCaret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--neon-red) }
-}
-
-/* Connection lines animation */
-.connection-line {
-  animation: pulseConnection 4s infinite;
-}
-
-@keyframes pulseConnection {
-  0%, 100% {
-    stroke-opacity: 0.1;
-  }
-  50% {
-    stroke-opacity: 0.3;
-  }
+  background: var(--primary-color);
+  opacity: 0.8;
 }
 
 /* Chat specific styles */
 .chat-container {
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(247, 30, 76, 0.2);
-  box-shadow: 0 0 15px rgba(247, 30, 76, 0.1);
+  border: 1px solid var(--borderColor);
   border-radius: 16px;
-  background-color: rgba(10, 25, 41, 0.7);
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
 }
 
 .chat-message-user {
-  background: rgba(247, 30, 76, 0.15);
+  background: linear-gradient(to right, var(--gradientStartColor), var(--gradientEndColor));
   border-radius: 14px 14px 14px 0;
-  border-left: 2px solid var(--neon-red);
+  color: var(--white);
 }
 
 .chat-message-bot {
-  background: rgba(255, 255, 255, 0.05);
+  background-color: var(--borderColor);
   border-radius: 14px 14px 0 14px;
-  border-right: 2px solid rgba(247, 30, 76, 0.5);
+  color: var(--textColor);
 }
 
 .chat-input {
-  border: 1px solid rgba(247, 30, 76, 0.3);
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
 }
 
 .chat-input:focus {
-  border-color: var(--neon-red);
-  box-shadow: 0 0 10px rgba(247, 30, 76, 0.4);
+  border-color: var(--primary-color);
   outline: none;
+}
+
+/* Remover classes de tema claro/escuro */
+.light, .dark {
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+}
+
+/* Estilos para cores personalizadas - serão atualizados via JavaScript */
+.user-theme {
+  background-color: var(--backgroundColor) !important;
+  color: var(--textColor) !important;
+  border-color: var(--borderColor) !important;
 }
